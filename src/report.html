@@ -118,6 +118,29 @@
       cursor: pointer;
       transition: background 0.3s ease;
     }
+    form input[type="file"] {
+      background: #0f172a;
+      color: #f8fafc;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 0.6rem 1rem;
+      font-size: 1rem;
+    }
+
+    form input[type="file"]::file-selector-button {
+      background: #38bdf8;
+      color: #0f172a;
+      border: none;
+      border-radius: 6px;
+      padding: 0.5rem 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    form input[type="file"]::file-selector-button:hover {
+      background: #0ea5e9;
+    }
 
     form button:hover {
       background: #0ea5e9;
@@ -134,9 +157,9 @@
 </head>
 <body>
   <header>
-    <img class='back' onclick="location.href='/'" src="https://img.icons8.com/?size=100&id=26191&format=png&color=000000" alt="back">
+    <img class='back' onclick="location.href='/index.html'" src="https://img.icons8.com/?size=100&id=26191&format=png&color=000000" alt="back">
     <h1>Trace<span>Vault</span></h1>
-    <p>Report your lost item here. We’ll help you trace it down.</p>
+    <p>Report a lost item here.</p>
   </header>
 
   <section class="form-section">
@@ -159,10 +182,13 @@
       </div>
 
       <div>
-        <label for="locationLost">Where You Lost It</label>
+        <label for="locationLost">Where You Found It</label>
         <input type="text" id="locationLost" name="locationLost" placeholder="e.g., Faculty of Engineering" required>
       </div>
-
+      <div>
+        <label for="itemImage">Upload Image (optional)</label>
+        <input type="file" id="itemImage" name="itemImage" accept="image/*" required>
+      </div>
       <div>
         <label for="description">Description</label>
         <textarea id="description" name="description" placeholder="Details about the item, color, case, etc." required></textarea>
