@@ -78,6 +78,54 @@
         color: #4a4e69;
         font-weight: bold;
       }
+      /* Custom Alert Styles */
+      .custom-alert-backdrop {
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(15, 23, 42, 0.45);
+        z-index: 9999;
+        display: none;
+        align-items: center;
+        justify-content: center;
+      }
+      .custom-alert {
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 16px rgba(0,0,0,0.15);
+        padding: 2rem 2.5rem 1.5rem 2.5rem;
+        text-align: center;
+        max-width: 340px;
+        margin: 0 1rem;
+        position: relative;
+        animation: fadeInScale 0.2s;
+      }
+      .custom-alert-title {
+        color: #0f172a;
+        font-size: 1.3rem;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+      }
+      .custom-alert-message {
+        color: #444;
+        margin-bottom: 1.5rem;
+      }
+      .custom-alert-btn {
+        background: #0f172a;
+        color: #fff;
+        border: none;
+        padding: 0.7rem 1.5rem;
+        border-radius: 4px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      .custom-alert-btn:hover {
+        background: #22223b;
+      }
+      @keyframes fadeInScale {
+        from { opacity: 0; transform: scale(0.95);}
+        to { opacity: 1; transform: scale(1);}
+      }
     </style>
   </head>
   <body>
@@ -126,13 +174,6 @@
         <h2>Recent Feedbacks</h2>
         <!-- Example feedbacks -->
         <div class="feedback-item">
-          <div class="feedback-type">Suggestion</div>
-          <div>
-            "It would be great to have notifications when a found item matches
-            my lost report!"
-          </div>
-        </div>
-        <div class="feedback-item">
           <div class="feedback-type">Bug Report</div>
           <div>"Device tracing sometimes fails to update the location."</div>
         </div>
@@ -141,7 +182,16 @@
           <div>"TraceVault helped me recover my lost laptop. Thank you!"</div>
         </div>
       </section>
+      
     </main>
+    <!-- Custom Alert Element -->
+    <div class="custom-alert-backdrop" id="customAlertBackdrop">
+      <div class="custom-alert" role="alert" aria-modal="true">
+        <div class="custom-alert-title">Thank you!</div>
+        <div class="custom-alert-message">Thanks for sending your feedback.</div>
+        <button class="custom-alert-btn" id="customAlertBtn">OK</button>
+      </div>
+    </div>
     <script>
       // Simple client-side feedback handler (demo only)
       document
@@ -159,8 +209,19 @@
           feedbackList.insertBefore(item, feedbackList.children[1]);
 
           this.reset();
-          alert("Thank you for your feedback!");
+
+          // Show custom alert
+          document.getElementById("customAlertBackdrop").style.display = "flex";
         });
+
+      // Custom alert close handler
+      document.getElementById("customAlertBtn").onclick = function () {
+        document.getElementById("customAlertBackdrop").style.display = "none";
+      };
+      // Optional: close alert on backdrop click
+      document.getElementById("customAlertBackdrop").onclick = function (e) {
+        if (e.target === this) this.style.display = "none";
+      };
     </script>
   </body>
 </html>
